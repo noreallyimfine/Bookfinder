@@ -1,0 +1,4 @@
+Cleaning steps:
+
+1. Drop null descriptions
+2. Find and remove doubles
