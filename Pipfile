@@ -8,6 +8,10 @@ flake8 = "*"
 
 [packages]
 selenium = "*"
+pandas = "*"
+scikit-learn = "*"
+matplotlib = "*"
+pyenchant = "*"
 
 [requires]
 python_version = "3.7"
