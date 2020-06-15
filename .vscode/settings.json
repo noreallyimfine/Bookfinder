@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\jayja\\Anaconda3\\envs\\book-recommender\\python.exe",
+    "python.pythonPath": "C:\\Users\\jayja\\.virtualenvs\\Bookfinder-jFAa0Aax\\Scripts\\python.exe",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true
