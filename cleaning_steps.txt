@@ -3,5 +3,11 @@ Cleaning steps:
 1. Drop null descriptions
 2. Find and remove doubles
 3. Drop Non-English
-4. 
+
+
+Tfidf:
+    - with no min or max df had >100k param
+    - with min df of 0.05 and max of 0.95 params reduced too 127
+    - this is withouth lemmatizing words
+    
 
