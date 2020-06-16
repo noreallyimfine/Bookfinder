@@ -9,12 +9,16 @@ f = open("best_books_titles.csv", 'w', encoding='UTF-8')
 csv_writer = csv.writer(f)
 csv_writer.writerow(["Title", "Author", "Rating"])
 titles = []
-for page in range(1, 524):
+for page in range(1, 525):
     driver.get(f'{BASE_URL}{BOOK_LIST}{page}')
     for i in range(1, 101):
-        title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]')
-        title_list = title.text.split("\n")
-        csv_writer.writerow(title_list)
+        title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/a/span')
+        author = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/span[2]')
+        rating = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/div[1]/span/span')
+
+        # print(title.text, author.text, rating.text)
+
+        csv_writer.writerow([title.text, author.text, rating.text])
 
 
 f.close()
