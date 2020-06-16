@@ -8,4 +8,4 @@ driver.get(BASE_URL + first_page)
 
 
 
-driver.close()
+# driver.close()
