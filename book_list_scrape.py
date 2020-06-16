@@ -6,10 +6,14 @@ BASE_URL = "https://www.goodreads.com/list/show/"
 first_page = "1.Best_Books_Ever"
 driver.get(BASE_URL + first_page)
 
-title = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div[1]/div[2]/div[3]/div[5]/table/tbody/tr[1]/td[3]/a/span')
+titles = []
+for i in range(1, 101):
+    title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]')
+    titles.append(title)
 # print(dir(title))
 
-print("Text", title.text)
-
+for i, title in enumerate(titles):
+    if i % 5 == 0:
+        print(f"Book {i}: {title.text}")
 
 driver.close()
