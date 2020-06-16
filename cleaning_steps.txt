@@ -11,3 +11,9 @@ Tfidf:
     - this is withouth lemmatizing words
     
 
+
+Data Questions 
+    - description on goodreads not always about the plot
+    - if theres a wiki page, I can use the plot summary section
+
+
