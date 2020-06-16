@@ -8,12 +8,12 @@ driver.get(BASE_URL + first_page)
 
 titles = []
 for i in range(1, 101):
-    title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]')
+    title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]')
     titles.append(title)
 # print(dir(title))
+# Harry Potter and the Order of the Phoenix -> //*[@id="all_votes"]/table/tbody/tr[2]/td[3]
+# The Hunger Games -> //*[@id="all_votes"]/table/tbody/tr[1]/td[3]
+hunger_games = titles[0]
 
-for i, title in enumerate(titles):
-    if i % 5 == 0:
-        print(f"Book {i}: {title.text}")
-
+print(hunger_games.text.split('\n'))
 driver.close()
