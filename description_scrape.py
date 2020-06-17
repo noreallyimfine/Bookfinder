@@ -39,15 +39,22 @@ for i in range(1, 5):
     time.sleep(1)
     if counter < 3:
         counter = handle_signin(counter)
+
     
+    more_deets = driver.find_element_by_xpath('//*[@id="bookDataBoxShow"]')
+    print(more_deets.text)
+    more_deets.click()
     # open more details
-    driver.find_element_by_xpath('//*[@id="details"]/div[3]').click()
+    # driver.find_element_by_xpath('//*[@id="details"]/div[3]').click()
     time.sleep(1)
+
 
     language_edition = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[1]')
     print("Language Edition:", language_edition.text)
     language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[2]')
                                             # //*[@id="bookDataBox"]/div[3]/div[2]
+                                            # //*[@id="bookDataBox"]/div[2]/div[2]
+                                            # #bookDataBox > div:nth-child(2) > div.infoBoxRowTitle
 
     print("Language:", language.text)
 
@@ -55,4 +62,3 @@ for i in range(1, 5):
 
 
 driver.close()
-
