@@ -11,14 +11,15 @@ BOOK_LIST = "1.Best_Books_Ever?page="
 # f = open("best_books_details.csv", 'w', encoding='UTF-8')
 
 
-def handle_signin():
+def handle_signin(counter):
     try:
         driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/button').click()
         print("Found element and clicked!")
     except NoSuchElementException as e:
         print(e)
+        counter += 1
     finally:
-        return
+        return counter
 
 
 driver.get(f'{BASE_URL}{BOOK_LIST}1')
@@ -28,7 +29,7 @@ for i in range(1, 5):
 
     time.sleep(1)
     if counter < 3:
-        handle_signin()
+        counter = handle_signin(counter)
 
     title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/a/span')
     author = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/span[2]')
@@ -37,12 +38,16 @@ for i in range(1, 5):
     title.click()
     time.sleep(1)
     if counter < 3:
-        handle_signin()
+        counter = handle_signin(counter)
     
     # open more details
     driver.find_element_by_xpath('//*[@id="details"]/div[3]').click()
+    time.sleep(1)
 
-    language = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[3]/div[2]')
+    language_edition = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[1]')
+    print("Language Edition:", language_edition.text)
+    language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[2]')
+                                            # //*[@id="bookDataBox"]/div[3]/div[2]
 
     print("Language:", language.text)
 
