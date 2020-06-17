@@ -9,7 +9,8 @@ BASE_URL = "https://www.goodreads.com/list/show/"
 BOOK_LIST = "1.Best_Books_Ever?page="
 
 # f = open("best_books_details.csv", 'w', encoding='UTF-8')
-
+# csv_writer = csv.writer(f)
+# csv_writer.writerow(['title', 'author', 'rating', 'language', 'description'])
 
 def handle_signin(counter):
     try:
@@ -54,9 +55,13 @@ for i in range(1, 5):
     else:
         language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[2]')
         
-
     print("Language:", language.text)
 
+    more_button = driver.find_elements_by_xpath('//*[@id="description"]/a')
+
+    description = driver.find_elements_by_xpath('//*[@id="freeText11866680891137652558"]')
+
+    print(description.text)
     driver.back()
 
 
