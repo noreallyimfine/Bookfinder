@@ -57,12 +57,15 @@ for i in range(1, 5):
         
     print("Language:", language.text)
 
-    more_button = driver.find_elements_by_xpath('//*[@id="description"]/a')
+    # more_button = driver.find_elements_by_xpath('//*[@id="description"]')
                                                 # //*[@id="description"]/a
-    more_button.click()
+                                                # //*[@id="bookDataBox"]/div[1]/div[1]
+    # more_button.click()
 
-    description = driver.find_elements_by_xpath('//*[@id="freeText11866680891137652558"]')
+    description = driver.find_elements_by_xpath('//*[@id="freeText16131254767828611352"]/b')
+                                                # //*[@id="freeText16131254767828611352"]/b
 
+    print(description)
     for d in description:
         print(d)
     driver.back()
