@@ -12,6 +12,7 @@ BOOK_LIST = "1.Best_Books_Ever?page="
 # csv_writer = csv.writer(f)
 # csv_writer.writerow(['title', 'author', 'rating', 'language', 'description'])
 
+
 def handle_signin(counter):
     try:
         driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/button').click()
@@ -23,52 +24,45 @@ def handle_signin(counter):
         return counter
 
 
-driver.get(f'{BASE_URL}{BOOK_LIST}1')
-
 counter = 0
-for i in range(1, 5):
+# first run - 10 pages to test
+for page in range(1, 11):
+    driver.get(f'{BASE_URL}{BOOK_LIST}{page}')
 
-    time.sleep(1)
-    if counter < 3:
-        counter = handle_signin(counter)
+    for i in range(1, 5):
 
-    title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/a/span')
-    author = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/span[2]')
-    rating = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/div[1]/span/span')
-    
-    title.click()
-    time.sleep(1)
-    if counter < 3:
-        counter = handle_signin(counter)
+        time.sleep(1)
+        if counter < 3:
+            counter = handle_signin(counter)
 
-    
-    more_deets = driver.find_element_by_xpath('//*[@id="bookDataBoxShow"]')
-    print(more_deets.text)
-    more_deets.click()
-    # open more details
-    time.sleep(1)
+        title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/a/span')
+        author = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/span[2]')
+        rating = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/div[1]/span/span')
 
-    
-    language_edition = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[2]/div[1]')
-    if 'Language' in language_edition.text:
-        language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[2]/div[2]')
-    else:
-        language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[2]')
-        
-    print("Language:", language.text)
+        title.click()
+        time.sleep(.5)
+        if counter < 3:
+            counter = handle_signin(counter)
 
-    # more_button = driver.find_elements_by_xpath('//*[@id="description"]')
-                                                # //*[@id="description"]/a
-                                                # //*[@id="bookDataBox"]/div[1]/div[1]
-    # more_button.click()
+        # open more details
+        more_deets = driver.find_element_by_xpath('//*[@id="bookDataBoxShow"]')
+        more_deets.click()
+        time.sleep(.5)
 
-    description = driver.find_elements_by_xpath('//*[@id="freeText16131254767828611352"]/b')
-                                                # //*[@id="freeText16131254767828611352"]/b
+        language_edition = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[2]/div[1]')
+        if 'Language' in language_edition.text:
+            language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[2]/div[2]')
+        else:
+            language = driver.find_element_by_xpath('//*[@id="bookDataBox"]/div[3]/div[2]')
 
-    print(description)
-    for d in description:
-        print("printing d element: -> ", d.text)
-    driver.back()
+        print("Language:", language.text)
+
+        description = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[3]/div/span[2]')
+
+        for d in description:
+            print(d.get_attribute("innerText"))
+
+        driver.back()
 
 
 driver.close()
