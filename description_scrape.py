@@ -8,7 +8,7 @@ driver = webdriver.Chrome()
 BASE_URL = "https://www.goodreads.com/list/show/"
 BOOK_LIST = "1.Best_Books_Ever?page="
 
-f = open("best_books_details_2.csv", 'w', encoding='UTF-8')
+f = open("best_books_details_4.csv", 'w', encoding='UTF-8')
 csv_writer = csv.writer(f)
 csv_writer.writerow(['title', 'author', 'rating', 'description',
                      'language', 'isbn'])
@@ -27,7 +27,7 @@ def handle_signin(counter):
 
 counter = 0
 # first run - 10 pages to test
-for page in range(3, 11):
+for page in range(11, 25):
     driver.get(f'{BASE_URL}{BOOK_LIST}{page}')
 
     for i in range(1, 101):
