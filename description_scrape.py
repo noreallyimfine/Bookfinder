@@ -30,7 +30,7 @@ counter = 0
 for page in range(1, 11):
     driver.get(f'{BASE_URL}{BOOK_LIST}{page}')
 
-    for i in range(1, 3):
+    for i in range(1, 101):
         
         
         # dictionary to write consistently to csv
@@ -41,11 +41,11 @@ for page in range(1, 11):
                 "author": None,
                 "rating": None,
                 "description": None,
-                "Language Edition": None,
-                "Language": None,
-                "ISBN": None}
+                "language": None,
+                "isbn": None}
 
         time.sleep(1)
+        print("Counter:", counter)
         if counter < 3:
             counter = handle_signin(counter)
 
@@ -58,7 +58,8 @@ for page in range(1, 11):
         data['rating'] = rating.text
 
         title.click()
-        time.sleep(.5)
+        time.sleep(1)
+        print("Counter:", counter)
         if counter < 3:
             counter = handle_signin(counter)
 
@@ -67,18 +68,26 @@ for page in range(1, 11):
         more_deets.click()
         time.sleep(.5)
 
-        headers = ['Edition Language', 'ISBN']
         for div in range(1, 4):
-            header = driver.find_element_by_xpath(f'/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[{div}]/div[1]').get_attribute('innerText')
-            if header == 'Edition Language':
-                data['language'] = driver.find_element_by_xpath(f'/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[{div}]/div[2]').get_attribute('innerText')
-            elif header == 'ISBN':
-                data['isbn'] = driver.find_element_by_xpath(f'/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[{div}]/div[2]').get_attribute('innerText')
+            try:
+                header = driver.find_element_by_xpath(f'/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[{div}]/div[1]').get_attribute('innerText')
+                if header == 'Edition Language':
+                    data['language'] = driver.find_element_by_xpath(f'/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[{div}]/div[2]').get_attribute('innerText')
+                elif header == 'ISBN':
+                    data['isbn'] = driver.find_element_by_xpath(f'/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[5]/div[3]/div[1]/div[{div}]/div[2]').get_attribute('innerText')
+            except NoSuchElementException:
+                print(f"Error getting div {div}")
 
         description = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[3]/div/span[2]')
 
+        if len(description) < 1:
+            description = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[3]/div/span[1]')
+
         
-        data['description'] = description[0].get_attribute('innerText')
+        try:
+            data['description'] = description[0].get_attribute('innerText')
+        except NoSuchElementException:
+            print(f"Error getting description, for book {title}")
         csv_writer.writerow([data['title'], data['author'], data['rating'],
                              data['description'], data['language'], data['isbn']])
 
