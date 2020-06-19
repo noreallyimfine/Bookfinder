@@ -67,7 +67,7 @@ for i in range(1, 5):
 
     print(description)
     for d in description:
-        print(d)
+        print("printing d element: -> ", d.text)
     driver.back()
 
 
