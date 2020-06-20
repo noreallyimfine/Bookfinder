@@ -45,7 +45,6 @@ for page in range(11, 25):
                 "isbn": None}
 
         time.sleep(1)
-        print("Counter:", counter)
         if counter < 3:
             counter = handle_signin(counter)
 
@@ -58,13 +57,17 @@ for page in range(11, 25):
         data['rating'] = rating.text
 
         title.click()
-        time.sleep(1)
+        time.sleep(1.25)
         if counter < 3:
             counter = handle_signin(counter)
 
         # open more details
-        more_deets = driver.find_element_by_xpath('//*[@id="bookDataBoxShow"]')
-        more_deets.click()
+        try:
+            more_deets = driver.find_element_by_xpath('//*[@id="bookDataBoxShow"]')
+                                                  # //*[@id="bookDataBoxShow"]
+            more_deets.click()
+        except:
+            print("Could not click more details")
         time.sleep(.5)
 
         for div in range(1, 4):
