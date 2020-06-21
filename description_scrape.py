@@ -48,15 +48,18 @@ for page in range(50, 101):
         if counter < 3:
             counter = handle_signin(counter)
 
-        title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/a/span')
-        author = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/span[2]')
-        rating = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/div[1]/span/span')
+        try:
+            title = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/a/span')
+            author = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/span[2]')
+            rating = driver.find_element_by_xpath(f'//*[@id="all_votes"]/table/tbody/tr[{i}]/td[3]/div[1]/span/span')
 
-        data['title'] = title.text
-        data['author'] = author.text
-        data['rating'] = rating.text
+            data['title'] = title.text
+            data['author'] = author.text
+            data['rating'] = rating.text
 
-        title.click()
+            title.click()
+        except:
+            print("Could not find title/author/rating")
         time.sleep(1.25)
         if counter < 3:
             counter = handle_signin(counter)
@@ -85,7 +88,6 @@ for page in range(50, 101):
         if len(description) < 1:
             description = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[3]/div/span[1]')
 
-        
         try:
             data['description'] = description[0].get_attribute('innerText')
         except:
