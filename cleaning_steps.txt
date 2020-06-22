@@ -7,7 +7,7 @@ Cleaning steps:
 
 Tfidf:
     - with no min or max df had >100k param
-    - with min df of 0.05 and max of 0.95 params reduced too 127
+    - with min df of 0.05 and max of 0.95 params reduced to 127
     - this is withouth lemmatizing words
     
 
