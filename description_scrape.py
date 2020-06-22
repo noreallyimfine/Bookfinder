@@ -27,7 +27,7 @@ def handle_signin(counter):
 
 counter = 0
 # first run - 10 pages to test
-for page in range(250, 301):
+for page in range(350, 401):
     driver.get(f'{BASE_URL}{BOOK_LIST}{page}')
 
     for i in range(1, 101):
