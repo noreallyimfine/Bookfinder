@@ -8,7 +8,7 @@ driver = webdriver.Chrome()
 BASE_URL = "https://www.goodreads.com/list/show/"
 BOOK_LIST = "1.Best_Books_Ever?page="
 
-f = open("best_books_details_5.csv", 'w', encoding='UTF-8')
+f = open("best_books_details_6.csv", 'w', encoding='UTF-8')
 csv_writer = csv.writer(f)
 csv_writer.writerow(['title', 'author', 'rating', 'description',
                      'language', 'isbn'])
