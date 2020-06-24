@@ -1,8 +1,8 @@
 Cleaning steps:
 
-1. Drop null titles and descriptions
+1. Filter for english books
+2. Drop null titles and descriptions
 2. Find and remove doubles
-3. Drop Non-English
 
 
 Tfidf:
