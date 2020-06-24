@@ -2,7 +2,9 @@ Cleaning steps:
 
 1. Filter for english books
 2. Drop null titles and descriptions
-2. Find and remove doubles
+3. Find and remove doubles
+4. Replace all no alpha-numeric characters with ' ' in 'text' column
+5. 
 
 
 Tfidf:
