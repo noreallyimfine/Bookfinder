@@ -17,5 +17,6 @@ Tfidf:
 Data Questions 
     - description on goodreads not always about the plot
     - if theres a wiki page, I can use the plot summary section
+    - do i want to lowercase everything? how important is named entity recognition here?
 
 
