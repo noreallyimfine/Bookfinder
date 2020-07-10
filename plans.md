@@ -13,9 +13,13 @@
 
 ### Modeling progress
 - have run TfidfVectorizer and Gensim simple_preprocess a bit, not great results
+- basic spaCy same thing
+*I believe I'm going to need to do some better NLPing because this basic stuff is terrible
 
 ### Future Ideas
 - get better descriptions from wikipedia where possible
 - combine books from series into 1 datapoint
+- can change names into more descriptive words like (man, woman, doctor, president, etc...)
+
 
 
